@@ -7,7 +7,10 @@ const runDay = (day: number) => {
   console.log(`Running day: ${day}`);
   const dayMod = require(`./day${day}`);
 
-  let input = fs.readFileSync(`input/${day}.txt`).toString();
+  let input = fs.readFileSync(`input/${day}.txt`)
+    .toString()
+    .replaceAll('\r\n', '\n');
+
   if (dayMod.parseInput) {
     input = dayMod.parseInput(input);
   }
