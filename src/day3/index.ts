@@ -23,5 +23,5 @@ const splitEvery = <T>(n: number, list: T[], accum: T[][] = []): T[][] => list.l
   : splitEvery(n, list.slice(n), [...accum, list.slice(0, n)])
 
 export const executePart2 = (input: number[][]) => splitEvery(3, input)
-  .map(([left, middle, right]) => left.find((ln) => middle.find((mn) => right.find((rn) => ln === mn && mn === rn))))
+  .map(([left, middle, right]) => left.find((ln) => middle.find((mn) => ln === mn && right.find((rn) => mn === rn))))
   .reduce((sum, n) => sum + n);
