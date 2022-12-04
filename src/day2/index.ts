@@ -1,8 +1,9 @@
 // A/X = Rock
 // B/Y = Paper
 // C/Z = Scissors
-const elfLookup = { A: 0, B: 1, C: 2 };
-const selfLookup = { X: 0, Y: 1, Z: 2 };
+type Lookup = Record<string, number>;
+const elfLookup: Lookup = { A: 0, B: 1, C: 2 };
+const selfLookup: Lookup = { X: 0, Y: 1, Z: 2 };
 
 // +1 index vs points offset
 const points = {
