@@ -15,7 +15,7 @@ const splitEvery = <T>(n: number, skip: number, list: T[], accum: T[][] = []): T
   ? accum
   : splitEvery(n, skip, list.slice(n + skip), [...accum, list.slice(0, n)])
 
-const transpose = <T>(list: T[][]) => list[0].map((_, colIndex) => list.map(row => row[colIndex]));
+const transpose = <T>(list: T[][]) => list[0].map((_, colIdx) => list.map((row) => row[colIdx]));
 
 export const parseInput = (input: string): Crane => {
   const [dirtyStack, dirtyMoves] = input.split('\n\n');
