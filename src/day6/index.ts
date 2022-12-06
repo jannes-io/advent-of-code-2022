@@ -1,5 +1,3 @@
-export const parseInput = (input: string) => input;
-
 const unique = <T>(c: T, i: number, list: T[]) => list.indexOf(c) === i;
 const findMarkerPos = (markerLength: number, pos: number = 0) => (signal: string): number => signal
   .slice(0, markerLength)
