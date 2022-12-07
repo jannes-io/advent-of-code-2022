@@ -1,8 +1,6 @@
 import * as readline from 'readline';
 import * as fs from 'fs';
 
-console.log();
-
 const runDay = (day: number) => {
   console.log(`Running day: ${day}`);
   const dayMod = require(`./day${day}`);
@@ -15,8 +13,8 @@ const runDay = (day: number) => {
     input = dayMod.parseInput(input);
   }
 
-  console.log(`Part 1: ${dayMod.executePart1(input)}`);
-  console.log(`Part 2: ${dayMod.executePart2(input)}`);
+  console.log('Part 1', dayMod.executePart1(input));
+  console.log('Part 2', dayMod.executePart2(input));
 
   process.exit(0);
 };
