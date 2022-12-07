@@ -6,27 +6,17 @@ interface Command {
 
 type Directory = Record<string, number>;
 
-interface DirectoryDiscoveryState {
+interface DirectoryState {
   workingDir: number[];
   allDirs: number[];
   directory: Directory;
-}
-
-const initialDirectoryDiscoveryState: DirectoryDiscoveryState = {
-  workingDir: [],
-  allDirs: [],
-  directory: {},
 }
 
 const groupCommands = (commands: Command[], line: string[]) => line[0] === '$'
   ? [...commands, { command: line[1], args: line.slice(2), stdout: [] as string[] }]
   : commands[commands.length - 1].stdout.push(line) && commands
 
-const executeCommand = ({
-  directory,
-  allDirs,
-  workingDir
-}: DirectoryDiscoveryState, command: Command): DirectoryDiscoveryState => {
+const executeCommand = ({ directory, allDirs, workingDir }: DirectoryState, command: Command) => {
   if (command.command === 'cd') {
     const dirId = allDirs.length;
 
@@ -51,7 +41,7 @@ const executeCommand = ({
   };
 }
 
-const aggregateSizes = ({ directory, allDirs }: DirectoryDiscoveryState) => allDirs
+const aggregateSizes = ({ directory, allDirs }: DirectoryState) => allDirs
   .map((dir) => Object
     .entries(directory)
     .filter(([key]) => key.includes(`/${dir}/`))
@@ -60,8 +50,8 @@ const aggregateSizes = ({ directory, allDirs }: DirectoryDiscoveryState) => allD
 export const parseInput = (input: string) => aggregateSizes(input
   .split('\n')
   .map((line) => line.split(' '))
-  .reduce(groupCommands, [] as Command[])
-  .reduce(executeCommand, initialDirectoryDiscoveryState));
+  .reduce(groupCommands, [])
+  .reduce(executeCommand, { workingDir: [], allDirs: [], directory: {} }));
 
 export const executePart1 = (sizes: number[]) => sizes
   .filter((v) => v < 100000)
