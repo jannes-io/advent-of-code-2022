@@ -33,28 +33,41 @@ const clampN2 = (min: number, max: number, vec: N2) => vec.map(clamp(min, max));
 interface TrailTailAccum {
   head: N2;
   tail: N2;
+  tailMoves: N2[];
   tailVisited: N2[];
 }
 
-const trailTail = ({ head, tail, tailVisited }: TrailTailAccum, vel: N2) => {
+const trailTail = ({ head, tail, tailVisited, tailMoves }: TrailTailAccum, vel: N2) => {
   const newHead = add(head, vel);
   const offset = subtract(newHead, tail);
   if (adjacent(offset)) {
-    return { head: newHead, tail, tailVisited };
+    return { head: newHead, tail, tailVisited, tailMoves };
   }
-  const newTail = add(tail, clampN2(-1, 1, offset));
+  const tailVel = clampN2(-1, 1, offset);
+  const newTail = add(tail, tailVel);
   const notVisited = tailVisited.find((visited) => equal(visited, newTail)) === undefined;
   return {
     head: newHead,
     tail: newTail,
+    tailMoves: [...tailMoves, tailVel],
     tailVisited: notVisited ? [...tailVisited, newTail] : tailVisited,
   };
 };
 
+const initialAccum: TrailTailAccum = {
+  head: [0, 0],
+  tail: [0, 0],
+  tailMoves: [],
+  tailVisited: [[0, 0]],
+};
+
 export const executePart1 = (input: N2[]) => input
-  .reduce(trailTail, { head: [0, 0], tail: [0, 0], tailVisited: [[0, 0]] })
+  .reduce(trailTail, initialAccum)
   .tailVisited
   .length;
 
-export const executePart2 = (input: unknown) => {
-};
+export const executePart2 = (input: N2[]) => [...Array(9).fill(0)]
+  .reduce((acc: TrailTailAccum) => acc.tailMoves
+    .reduce(trailTail, initialAccum), { ...initialAccum, tailMoves: input })
+  .tailVisited
+  .length;
