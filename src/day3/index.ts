@@ -20,7 +20,7 @@ export const executePart1 = (input: number[][]) => input
 
 const splitEvery = <T>(n: number, list: T[], accum: T[][] = []): T[][] => list.length === 0
   ? accum
-  : splitEvery(n, list.slice(n), [...accum, list.slice(0, n)])
+  : splitEvery(n, list.slice(n), [...accum, list.slice(0, n)]);
 
 export const executePart2 = (input: number[][]) => splitEvery(3, input)
   .map(([left, middle, right]) => left.find((ln) => middle.find((mn) => ln === mn && right.find((rn) => mn === rn))))

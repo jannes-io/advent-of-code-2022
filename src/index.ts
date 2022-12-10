@@ -13,8 +13,10 @@ const runDay = (day: number) => {
     input = dayMod.parseInput(input);
   }
 
-  console.log('Part 1', dayMod.executePart1(input));
-  console.log('Part 2', dayMod.executePart2(input));
+  console.log('Part 1');
+  console.log(dayMod.executePart1(input));
+  console.log('Part 2');
+  console.log(dayMod.executePart2(input));
 
   process.exit(0);
 };

@@ -28,7 +28,7 @@ const subtract: N2Fn<N2> = ([posX, posY], [velX, velY]) => [posX - velX, posY - 
 const equal: N2Fn<boolean> = ([pos1X, pos1Y], [pos2X, pos2Y]) => pos1X === pos2X && pos1Y === pos2Y;
 const adjacent = (pos: N2) => Object.values(vecToVel).some((vel) => equal(vel, pos));
 const clamp = (min: number, max: number) => (n: number) => n > max ? max : (n < min ? min : n);
-const clampN2 = (min: number, max: number, vec: N2) => vec.map(clamp(min, max));
+const clampN2 = (min: number, max: number, vec: N2) => vec.map(clamp(min, max)) as N2;
 
 interface TrailTailAccum {
   head: N2;
