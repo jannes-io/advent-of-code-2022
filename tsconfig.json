@@ -5,7 +5,7 @@
     "lib": [
       "esnext"
     ],
-    "target": "es6",
+    "target": "es2022",
     "noImplicitAny": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
