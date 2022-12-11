@@ -41,13 +41,13 @@ export const executePart2 = (input: Instruction[]) => {
 
   input.forEach(([ins, v]) => {
     if (ins === 'addx') {
-      draw(x);
+      draw();
       cycle++;
-      draw(x);
+      draw();
       cycle++;
       x += v;
     } else {
-      draw(x);
+      draw();
       cycle++;
     }
   });
